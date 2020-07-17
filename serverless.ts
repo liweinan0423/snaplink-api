@@ -19,13 +19,20 @@ const serverlessConfiguration: Serverless = {
   provider: {
     name: "aws",
     runtime: "nodejs12.x",
-    region: 'ap-southeast-1',
+    region: "ap-southeast-1",
     apiGateway: {
       minimumCompressionSize: 1024,
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
     },
+    iamRoleStatements: [
+      {
+        Effect: "Allow",
+        Action: "s3:*",
+        Resource: "*",
+      },
+    ],
   },
   functions: {
     hello: {
@@ -44,6 +51,7 @@ const serverlessConfiguration: Serverless = {
       events: [
         {
           http: {
+            cors: true,
             method: "post",
             path: "genTxtMsg",
           },
