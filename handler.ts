@@ -41,3 +41,27 @@ export const genTxtMsg: APIGatewayProxyHandler = async (event, _context) => {
     ),
   };
 };
+
+export const getLinkContent: APIGatewayProxyHandler = async (
+  event,
+  _context
+) => {
+  const filename = event.queryStringParameters.name;
+
+  const result = await s3
+    .getObject({
+      Bucket: "snaplink",
+      Key: filename,
+    })
+    .promise();
+
+  const content = result.Body.toString();
+
+  await s3.deleteObject({
+    Bucket: "snaplink",
+    Key: filename,
+  }).promise();
+  
+
+  return { statusCode: 200, body: content };
+};

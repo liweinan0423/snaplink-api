@@ -58,6 +58,18 @@ const serverlessConfiguration: Serverless = {
         },
       ],
     },
+    getLinkContent: {
+      handler: "handler.getLinkContent",
+      events: [
+        {
+          http: {
+            cors: true,
+            method: "get",
+            path: "link",
+          },
+        },
+      ],
+    },
   },
 };
 
