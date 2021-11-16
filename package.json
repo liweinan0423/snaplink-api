@@ -8,7 +8,7 @@
     "deploy": "sls deploy"
   },
   "dependencies": {
-    "aws-sdk": "^2.714.2",
+    "aws-sdk": "^2.814.0",
     "source-map-support": "^0.5.10",
     "uuid": "^8.2.0"
   },
